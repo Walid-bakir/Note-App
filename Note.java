@@ -1,12 +1,18 @@
 public class Note{
 
+  private int id;
   private String title;
   private String content;
 
-  public Note(String title, String content){
+  public Note(int id, String title, String content){
+    this.id = id;
     this.title = title;
     this.content = content;
   }
+
+  public int getId(){
+    return this.id;
+   }
 
   public String getTitle(){
     return this.title;
@@ -24,8 +30,12 @@ public class Note{
     this.content = content;
   }
 
+  public void setId(int id){
+    this.id = id;
+  }
+
   @Override
   public String toString(){
-    return this.title + ": " + this.content;
+    return "Note " + this.id + "|| " + this.title + ": " + this.content;
   }
 }

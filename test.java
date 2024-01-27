@@ -1,29 +1,44 @@
-public class test{
-  public static void main(String[] args) {
+import java.util.Scanner;
+
+public class test {
+    public static void main(String[] args) {
         NoteHandler play = new NoteHandler();
+        Scanner scanner = new Scanner(System.in);
 
-        Note note1 = new Note("Note 1", "Call Mom!");
-        Note note2 = new Note("Note 2", "Go to the supermarket!");
-        Note note3 = new Note("Note 3", "Revise a bit ot the holy Quran!");
+        while (true) {
+            System.out.println("\nOptions: \n1. Add Note \n2. Delete Note \n3. Display Notes \n4. Exit");
+            System.out.print("Enter choice: ");
+            int choice = scanner.nextInt();
 
+            switch (choice) {
+                case 1: // Add Note
+                    scanner.nextLine(); // Consume the remaining newline
+                    System.out.print("Enter Note Title: ");
+                    String title = scanner.nextLine();
+                    System.out.print("Enter Note Content: ");
+                    String content = scanner.nextLine();
+                    int id = play.getMaxId(); // Assuming getNextId() method gives the next available ID
+                    play.addNote(new Note(id, title, content));
+                    break;
 
-        play.displayNotes();
+                case 2: // Delete Note
+                    System.out.print("Enter Note ID to delete: ");
+                    int noteId = scanner.nextInt();
+                    play.deleteNote(noteId);
+                    break;
 
-        // add a note than Display
-        play.addNote(note1);
-        play.addNote(note2);
+                case 3: // Display Notes
+                    play.displayNotes();
+                    break;
 
-        //
-        play.displayNotes();
+                case 4: // Exit
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
 
-        //
-        System.out.println("Adding note 3: ");
-        play.addNote(note3);
-
-        System.out.println("Display after addition: ");
-        play.displayNotes();
-
-       // Empty the text file after the testing. We will not keep this forever.
-       play.deleteAllNotes();
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        }
     }
 }
